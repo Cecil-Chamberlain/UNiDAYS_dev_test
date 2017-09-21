@@ -2,7 +2,7 @@
 Web form to add a new user to an SQL database.
 
 # Build database
-In the terminal, to open SQL prompt:
+In the terminal, to open SQL prompt (where 'SQLEXPRESS' is the name of the local instance):
 ```
 sqlcmd -S .\SQLEXPRESS
 ```
