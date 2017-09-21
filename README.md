@@ -2,15 +2,18 @@
 Web form to add a new user to an SQL database.
 
 # Build database
-In the terminal:
+In the terminal, to open SQL prompt:
 ```
 sqlcmd -S .\SQLEXPRESS
-
+```
+Then regular SQL code:
+```
 >>> CREATE DATABASE UNiDAYS;
 >>> go
 >>> USE UNiDAYS;
 >>> go
 >>> CREATE TABLE Users ( UserID int NOT NULL IDENTITY(1,1) PRIMARY KEY, UserEmail varchar(255) NOT NULL UNIQUE, UserPassword varchar(255) NOT NULL, UserSalt varchar(255) NOT NULL);
+>>> go
 ```
 
 # Encryption of connection string
