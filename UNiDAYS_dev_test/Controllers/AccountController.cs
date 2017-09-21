@@ -65,7 +65,7 @@ namespace UNiDAYS_dev_test.Controllers
                     {
                         System.Diagnostics.Debug.WriteLine("Error" + ex.Errors[0].ToString());
                     }
-                    TempData.Add("Notification", "Account successfully added");
+                    TempData.Add("Notification", "Account successfully created");
                     return RedirectToAction("NewUser");
                 }
                 else
