@@ -17,14 +17,17 @@ Then regular SQL code:
 ```
 
 # Encryption of connection string
-Encrypt the connection string in web.config.
+
+Navigate to the following directory:
 ```
 cd C:\Windows\Microsoft.NET\Framework\v4.0.30319
+```
+Encrypt the connection string in web.config.
+```
 aspnet_regiis -pef connectionStrings C:\path\to\location\of\web.config
 ```
 Decrypt the connection string in web.config.
 ```
-cd C:\Windows\Microsoft.NET\Framework\v4.0.30319
 aspnet_regiis -pdf connectionStrings C:\path\to\location\of\web.config
 ```
 Crucially, the path should only identify the folder which holds web.config rather than point to the file its self.
