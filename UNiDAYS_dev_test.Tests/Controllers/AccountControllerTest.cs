@@ -35,9 +35,14 @@ namespace UNiDAYS_dev_test.Tests.Controllers
         public void TestNewUserPost()
         {
             var model = new NewUserViewModel();
-            _accountDbContext.Setup(m => m.CreateNewUser("user@domain.com", "somepassword")).Returns("some success string");
             var result = _controller.NewUser(model) as RedirectToRouteResult;
             Assert.AreEqual("NewUser", result.RouteValues["action"]);
+        }
+
+        [TestMethod]
+        public void Test()
+        {
+
         }
     }
 }
