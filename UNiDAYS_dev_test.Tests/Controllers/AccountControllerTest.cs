@@ -25,14 +25,14 @@ namespace UNiDAYS_dev_test.Tests.Controllers
         }
 
         [TestMethod]
-        public void TestNewUserGet()
+        public void TestNewUserGetReturnsCorrectViewResult()
         {
             var result = _controller.NewUser() as ViewResult;
             Assert.AreEqual("NewUser", result.ViewName);
         }
 
         [TestMethod]
-        public void TestNewUserPost()
+        public void TestNewUserPostReturnsCorrectRedirectToRouteResult()
         {
             var model = new NewUserViewModel();
             var result = _controller.NewUser(model) as RedirectToRouteResult;
@@ -40,9 +40,12 @@ namespace UNiDAYS_dev_test.Tests.Controllers
         }
 
         [TestMethod]
-        public void Test()
+        public void TestNewUserPostInvalidModelStateReturnsCorrectViewResult()
         {
-
+            var model = new NewUserViewModel();
+            _controller.ModelState.AddModelError("key", "error");
+            var result = _controller.NewUser(model) as ViewResult;
+            Assert.AreEqual("NewUser", result.ViewName);
         }
     }
 }
