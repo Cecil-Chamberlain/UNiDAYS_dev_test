@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Web;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Web.Mvc;
 using UNiDAYS_dev_test.Models;
@@ -11,15 +11,16 @@ namespace UNiDAYS_dev_test.Tests.Controllers
     [TestClass]
     public class AccountControllerTest
     {
-
-        private AccountController _controller;
         private Mock<IAccountDbContext> _accountDbContext;
+        private AccountController _controller;
+        
         
         [TestInitialize]
         public void TestInitialize()
         {
             _accountDbContext = new Mock<IAccountDbContext>();
             _controller = new AccountController(_accountDbContext.Object);
+            
 
         }
 
@@ -34,12 +35,9 @@ namespace UNiDAYS_dev_test.Tests.Controllers
         public void TestNewUserPost()
         {
             var model = new NewUserViewModel();
-
-            //_accountDbContext.Setup(m => m.CreateNewUser("test@domain.com", "password")).Returns("");
-            
-            var result = _controller.NewUser(model) as ViewResult;
-            //Assert.IsFalse(_controller.ModelState.IsValid);
-            Assert.AreEqual(model, result.ViewData.Model);
+            _accountDbContext.Setup(m => m.CreateNewUser("user@domain.com", "somepassword")).Returns("some success string");
+            var result = _controller.NewUser(model) as RedirectToRouteResult;
+            Assert.AreEqual("NewUser", result.RouteValues["action"]);
         }
     }
 }
