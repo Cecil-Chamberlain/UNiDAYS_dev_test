@@ -47,5 +47,29 @@ namespace UNiDAYS_dev_test.Tests.Controllers
             var result = _controller.NewUser(model) as ViewResult;
             Assert.AreEqual("NewUser", result.ViewName);
         }
+
+        [TestMethod]
+        public void TestNewUserGetReturnsViewResultType()
+        {
+            var result = _controller.NewUser() as ViewResult;
+            Assert.AreEqual(typeof(ViewResult), result.GetType());
+        }
+
+        [TestMethod]
+        public void TestNewUserPostReturnsRedirectToRouteResultType()
+        {
+            var model = new NewUserViewModel();
+            var result = _controller.NewUser(model) as RedirectToRouteResult;
+            Assert.AreEqual(typeof(RedirectToRouteResult), result.GetType());
+        }
+
+        [TestMethod]
+        public void TestNewUserPostInvalidModelStateReturnsViewResultType()
+        {
+            var model = new NewUserViewModel();
+            _controller.ModelState.AddModelError("key", "error");
+            var result = _controller.NewUser(model) as ViewResult;
+            Assert.AreEqual(typeof(ViewResult), result.GetType());
+        }
     }
 }

@@ -19,6 +19,8 @@ namespace UNiDAYS_dev_test.Tests.Services
         public void CrudTest()
         {
             string email = Create();
+            CreateFailsWhenEmailAlreadyExistsTest(email);
+            GetByEmailWhenEmailDoesNotExistOnDatabase("phony@address.com");
             GetByEmail(email);
             //Update(email);
             Delete(email);
@@ -40,6 +42,18 @@ namespace UNiDAYS_dev_test.Tests.Services
             string salt = _accountDbContext.CreateSalt(numBytes);
             string result = _accountDbContext.HashPassPlusSalt(password, salt);
             Assert.AreEqual(typeof(string), result.GetType());
+        }
+
+        private void GetByEmailWhenEmailDoesNotExistOnDatabase(string email)
+        {
+            int result = _accountDbContext.UserEmailExists(email);
+            Assert.AreEqual(0, result);
+        }
+
+        private void CreateFailsWhenEmailAlreadyExistsTest(string email)
+        {
+            string result = _accountDbContext.CreateNewUser(email, "password");
+            Assert.AreEqual("The email address provided already exists on the system.", result);
         }
 
         private string Create()
